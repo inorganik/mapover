@@ -52,16 +52,7 @@ ul, ol {
 //
 
 .svg-fill-gray svg {
-	fill: $gray-600;
-}
-.svg-fill-lt-gray svg {
-	fill: $gray-400;
-}
-.active-location.location1 svg {
-	fill: $location1;
-}
-.active-location.location2 svg {
-	fill: $location2;
+	fill: $gray-400 !important;
 }
 
 //

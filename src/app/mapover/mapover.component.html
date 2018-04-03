@@ -1,41 +1,44 @@
 <div class="mapover-sidebar">
   <div class="legend legend-width">
-    <h1>MAPOVER</h1>
+    <h1><span class="color-primary">M</span><span class="color-secondary">A</span><span class="color-primary">P</span><span class="color-secondary">O</span><span class="color-primary">V</span><span class="color-secondary">E</span><span class="color-primary">R</span></h1>
     <p>Compare the land mass of 2 locations</p>
   </div>
-  <div class="floating-box legend-width location1" [ngClass]="{ 'active-location': locations[0].isActive }">
+  <div class="floating-box legend-width location1" [ngClass]="{ 'active-location': locations[0].isActive }"d>
+    <!-- LOCATION 1 -->
     <div class="floating-box-inner">
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center ctrl-bar">
         <h5 class="mr-auto">Location 1</h5>
         <button mat-icon-button (click)="toggleVisibility(0)">
-          <mat-icon *ngIf="locations[0].isVisible" aria-label="Toggle visibility" svgIcon="visibility"></mat-icon>
-          <mat-icon *ngIf="!locations[0].isVisible" aria-label="Toggle visibility" svgIcon="visibility-off" class="svg-fill-lt-gray"></mat-icon>
+          <mat-icon class="on-state" *ngIf="locations[0].isVisible" aria-label="Toggle visibility" svgIcon="visibility"></mat-icon>
+          <mat-icon *ngIf="!locations[0].isVisible" aria-label="Toggle visibility" svgIcon="visibility-off" class="svg-fill-gray"></mat-icon>
         </button>
         <button mat-icon-button (click)="swapActive()">
-          <mat-icon aria-label="Pan map" svgIcon="pan" [ngClass]="{ 'svg-fill-lt-gray': !locations[0].isActive }"></mat-icon>
+          <mat-icon class="hinge-on-active" aria-label="Pan map" svgIcon="pan"></mat-icon>
         </button>
       </div>
-      <sf-place-search [location]="locations[0]" (onSelected)="setPlace(0, $event)"></sf-place-search>
+      <app-place-search [location]="locations[0]" (onSelected)="setPlace(0, $event)"></app-place-search>
     </div>
   </div>
   <div class="floating-box legend-width location2" [ngClass]="{ 'active-location': locations[1].isActive }">
+    <!-- SWAP BUTTON -->
     <div id="swap-button">
-      <button mat-mini-fab (click)="swapLocations()">
+      <button mat-mini-fab (click)="swapLocations()" color="primary">
         <mat-icon aria-label="Swap locations" svgIcon="swap-vert"></mat-icon>
       </button>
     </div>
-    <div class="floating-box-inner" [ngClass]="{ 'active-location': locations[1].isActive }">
-      <div class="d-flex align-items-center">
+    <!-- LOCATION 2 -->
+    <div class="floating-box-inner">
+      <div class="d-flex align-items-center ctrl-bar">
         <h5 class="mr-auto">Location 2</h5>
         <button mat-icon-button (click)="toggleVisibility(1)">
-          <mat-icon *ngIf="locations[1].isVisible" aria-label="Toggle visibility" svgIcon="visibility"></mat-icon>
-          <mat-icon *ngIf="!locations[1].isVisible" aria-label="Toggle visibility" svgIcon="visibility-off" class="svg-fill-lt-gray"></mat-icon>
+          <mat-icon class="on-state" *ngIf="locations[1].isVisible" aria-label="Toggle visibility" svgIcon="visibility"></mat-icon>
+          <mat-icon *ngIf="!locations[1].isVisible" aria-label="Toggle visibility" svgIcon="visibility-off" class="svg-fill-gray"></mat-icon>
         </button>
         <button mat-icon-button (click)="swapActive()">
-          <mat-icon aria-label="Pan map" svgIcon="pan" [ngClass]="{ 'svg-fill-lt-gray': !locations[1].isActive }"></mat-icon>
+          <mat-icon class="hinge-on-active" aria-label="Pan map" svgIcon="pan"></mat-icon>
         </button>
       </div>
-      <sf-place-search [location]="locations[1]" (onSelected)="setPlace(1, $event)"></sf-place-search>
+      <app-place-search [location]="locations[1]" (onSelected)="setPlace(1, $event)"></app-place-search>
     </div>
   </div>
 </div>

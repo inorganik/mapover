@@ -11,10 +11,76 @@ $custom-typography: mat-typography-config(
 // **Be sure that you only ever include this mixin once!**
 @include mat-core($custom-typography);
 
+$mapover-blue: (
+  50: #c6f4ff,
+  100: #97eaff,
+  200: #75e3ff,
+  300: #45daff,
+  400: #1cd2ff,
+  500: #00caff,
+  600: #00bceb,
+  700: #00a8eb,
+  800: #009ad6,
+  900: #008dce,
+  A100: #c6f4ff,
+  A200: #97eaff,
+  A400: #45daff,
+  A700: #00caff,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $dark-primary-text,
+  )
+);
+
+$mapover-red: (
+  50: #ffb3cc,
+  100: #ff91b6,
+  200: #ff76a3,
+  300: #ff5b92,
+  400: #ff3075,
+  500: #ff0055,
+  600: #e9004e,
+  700: #cf0045,
+  800: #b4003c,
+  900: #a50037,
+  A100: #ff91b6,
+  A200: #ff76a3,
+  A400: #ff3075,
+  A700: #ff0055,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
 // Define the default theme (same as the example above).
-$mapover-primary: mat-palette($mat-light-blue);
-$mapover-accent:  mat-palette($mat-pink, A200, A100, A400);
-$mapover-theme:   mat-dark-theme($mapover-primary, $mapover-accent);
+$mapover-primary: mat-palette($mapover-blue);
+$mapover-accent:  mat-palette($mapover-red, A200, A100, A400);
+$mapover-theme:   mat-light-theme($mapover-primary, $mapover-accent);
 
 // uncomment to include various components
 @include mat-core-theme($mapover-theme);

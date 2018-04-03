@@ -123,7 +123,7 @@ export const mapStyle2 = [
     'elementType': 'labels.text.fill',
     'stylers': [
       {
-        'color': '#757575'
+        'color': '#ff0055'
       }
     ]
   },

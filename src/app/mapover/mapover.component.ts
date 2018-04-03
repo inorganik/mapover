@@ -25,8 +25,9 @@ export class Location {
 })
 export class MapoverComponent implements AfterViewInit {
 
-  locations: Location[] = [
-    // San Francisco
+  locations: Location[];
+
+  allLocations: Location[] = [
     {
       description: 'San Francisco, CA, USA',
       place_id: 'ChIJIQBpAG2ahYAR_6128GcTUEo',
@@ -35,13 +36,28 @@ export class MapoverComponent implements AfterViewInit {
       isActive: false,
       isVisible: true
     },
-    // Denver
     {
       description: 'Denver, CO, USA',
       place_id: 'ChIJzxcfI6qAa4cR1jaKJ_j0jhE',
       lat: 39.7392358,
       lng: -104.990251,
       isActive: true,
+      isVisible: true
+    },
+    {
+      description: 'Los Angeles, CA, USA',
+      place_id: 'ChIJE9on3F3HwoAR9AhGJW_fL-I',
+      lat: 34.0522342,
+      lng: -118.2436849,
+      isActive: false,
+      isVisible: true
+    },
+    {
+      description: 'Barcelona, Spain',
+      place_id: 'ChIJ5TCOcRaYpBIRCmZHTz37sEQ',
+      lat: 41.38506389999999,
+      lng: 2.1734034999999494,
+      isActive: false,
       isVisible: true
     }
   ];
@@ -73,6 +89,8 @@ export class MapoverComponent implements AfterViewInit {
     iconRegistry.addSvgIcon('swap-vert', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_swap_vert_black_24px.svg'));
     iconRegistry.addSvgIcon('visibility', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_visibility_black_24px.svg'));
     iconRegistry.addSvgIcon('visibility-off', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_visibility_off_black_24px.svg'));
+    // locations
+    this.locations = this.allLocations.slice(0, 2);
   }
 
   ngAfterViewInit() {
@@ -115,7 +133,6 @@ export class MapoverComponent implements AfterViewInit {
   }
 
   swapLocations() {
-    console.log('swap locations');
     const loc2 = this.locations[1];
     const loc1 = this.locations[0];
     this.locations = [loc2, loc1];
@@ -126,18 +143,20 @@ export class MapoverComponent implements AfterViewInit {
     this.locations[1].isActive = !this.locations[0].isActive;
   }
 
+  oppositeIndex(idx) {
+    return (idx === 0) ? 1 : 0;
+  }
   setActive(idx) {
-    this.locations.map((loc, i) => {
-      if (i === idx) {
-        loc.isActive = true;
-      } else {
-        loc.isActive = false;
-      }
-    });
+    this.locations[idx].isActive = true;
+    this.locations[this.oppositeIndex(idx)].isActive = false;
   }
 
   toggleVisibility(idx) {
     this.locations[idx].isVisible = !this.locations[idx].isVisible;
+    if (this.locations[idx].isVisible === false) {
+      this.locations[this.oppositeIndex(idx)].isVisible = true;
+      this.setActive(this.oppositeIndex(idx));
+    }
   }
 
 }

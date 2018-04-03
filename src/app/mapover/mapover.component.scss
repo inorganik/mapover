@@ -6,17 +6,35 @@
 	'~bootstrap/scss/mixins';
 
 .location1 {
-	color: $location1;
+  h5 {
+    color: $location1;
+  }
+  &.active-location .ctrl-bar mat-icon.hinge-on-active svg {
+     fill: $location1;
+  }
+  mat-icon.on-state svg {
+    fill: $location1;
+  }
 }
 .location1-background {
-	background: $location2-light;
+  background: $location2-light;
+
 }
 .location2 {
-	color: $location2;
+  h5 {
+    color: $location2;
+  }
+  &.active-location .ctrl-bar mat-icon.hinge-on-active svg {
+    fill: $location2;
+  }
+  mat-icon.on-state svg {
+    fill: $location2;
+  }
 }
 .location2-background {
 	background: $location2-light;
 }
+
 .location1, .location2 {
 	margin-bottom: 0;
 	h5 {
@@ -26,57 +44,12 @@
 		text-transform: uppercase;
 	}
 }
-#swap-button {
-	position: absolute;
-	top: -31px;
-	left: 20px;
-	width: 50px;
-	height: 50px;
-}
-
-.legend-width {
-	max-width: 400px;
-}
-.floating-box {
-	position: relative;
-	margin-top: 20px;
-	background: white;
-	box-shadow: $hard-box-shadow;
-
-
-
-	// .active-location {
-	// 	&.location1 {
-	// 		svg {
-	// 			fill: $location1;
-	// 		}
-	// 	}
-	// 	&.location2 {
-	// 		svg {
-	// 			fill: $location2;
-	// 		}
-	// 	}
-	// }
-	.floating-box-inner {
-		padding: 10px $spacer 1px $spacer;
-	}
-}
 
 .mapover-sidebar {
 	position: absolute;
 	z-index: 10;
 	top: 20px;
 	left: 20px;
-}
-agm-map {
-	position: absolute;
-	height: 100vh;
-	width: 100vw;
-	opacity: .6;
-	&.active-map {
-		z-index: 2;
-		opacity: .4;
-	}
 }
 .legend {
 	text-align: center;
@@ -87,12 +60,57 @@ agm-map {
 	h1 {
 		font-weight: 200;
 		letter-spacing: 15px;
-		text-shadow: $hard-box-shadow;
+		text-shadow: -6px 6px rgba(0,0,0,0.1);
 		margin: .5rem;
-		padding-left: 15px;
+    padding-left: 15px;
 	}
 	p {
 		font-size: .8em;
 		color: $gray-600;
+	}
+}
+
+.color-primary {
+  color: $primary;
+}
+.color-secondary {
+  color: $secondary;
+}
+
+.legend-width {
+	max-width: 400px;
+}
+.floating-box {
+	position: relative;
+	margin-top: 20px;
+  box-shadow: $hard-box-shadow;
+  background: white;
+
+	svg {
+    fill: $gray-400;
+  }
+	.floating-box-inner {
+		padding: 10px $spacer 1px $spacer;
+  }
+}
+
+#swap-button {
+	position: absolute;
+	top: -31px;
+	left: 20px;
+	width: 50px;
+  height: 50px;
+  mat-icon svg {
+    fill: white;
+  }
+}
+agm-map {
+	position: absolute;
+	height: 100vh;
+	width: 100vw;
+	opacity: .6;
+	&.active-map {
+		z-index: 2;
+		opacity: .4;
 	}
 }
