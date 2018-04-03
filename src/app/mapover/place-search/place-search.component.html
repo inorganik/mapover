@@ -1,0 +1,12 @@
+<form>
+	<mat-form-field class="w-100">
+		<input matInput placeholder="Enter a city" name="place" aria-label="Enter a city" [matAutocomplete]="autoplace" [formControl]="placeCtrl" (input)="onChange($event)">
+		<mat-icon svgIcon="search" matSuffix class="svg-fill-gray"></mat-icon>
+		<mat-autocomplete #autoplace="matAutocomplete" id="place-autocomplete" (optionSelected)="selectedPlace($event)" [displayWith]="displayFn">
+			<mat-option *ngFor="let predict of predicts" [value]="predict">
+				{{ predict.description }}
+			</mat-option>
+		</mat-autocomplete>
+	</mat-form-field>
+</form>
+

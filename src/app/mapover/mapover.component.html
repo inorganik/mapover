@@ -1,0 +1,45 @@
+<div class="mapover-sidebar">
+  <div class="legend legend-width">
+    <h1>MAPOVER</h1>
+    <p>Compare the land mass of 2 locations</p>
+  </div>
+  <div class="floating-box legend-width location1" [ngClass]="{ 'active-location': locations[0].isActive }">
+    <div class="floating-box-inner">
+      <div class="d-flex align-items-center">
+        <h5 class="mr-auto">Location 1</h5>
+        <button mat-icon-button (click)="toggleVisibility(0)">
+          <mat-icon *ngIf="locations[0].isVisible" aria-label="Toggle visibility" svgIcon="visibility"></mat-icon>
+          <mat-icon *ngIf="!locations[0].isVisible" aria-label="Toggle visibility" svgIcon="visibility-off" class="svg-fill-lt-gray"></mat-icon>
+        </button>
+        <button mat-icon-button (click)="swapActive()">
+          <mat-icon aria-label="Pan map" svgIcon="pan" [ngClass]="{ 'svg-fill-lt-gray': !locations[0].isActive }"></mat-icon>
+        </button>
+      </div>
+      <sf-place-search [location]="locations[0]" (onSelected)="setPlace(0, $event)"></sf-place-search>
+    </div>
+  </div>
+  <div class="floating-box legend-width location2" [ngClass]="{ 'active-location': locations[1].isActive }">
+    <div id="swap-button">
+      <button mat-mini-fab (click)="swapLocations()">
+        <mat-icon aria-label="Swap locations" svgIcon="swap-vert"></mat-icon>
+      </button>
+    </div>
+    <div class="floating-box-inner" [ngClass]="{ 'active-location': locations[1].isActive }">
+      <div class="d-flex align-items-center">
+        <h5 class="mr-auto">Location 2</h5>
+        <button mat-icon-button (click)="toggleVisibility(1)">
+          <mat-icon *ngIf="locations[1].isVisible" aria-label="Toggle visibility" svgIcon="visibility"></mat-icon>
+          <mat-icon *ngIf="!locations[1].isVisible" aria-label="Toggle visibility" svgIcon="visibility-off" class="svg-fill-lt-gray"></mat-icon>
+        </button>
+        <button mat-icon-button (click)="swapActive()">
+          <mat-icon aria-label="Pan map" svgIcon="pan" [ngClass]="{ 'svg-fill-lt-gray': !locations[1].isActive }"></mat-icon>
+        </button>
+      </div>
+      <sf-place-search [location]="locations[1]" (onSelected)="setPlace(1, $event)"></sf-place-search>
+    </div>
+  </div>
+</div>
+<agm-map id="map1" [hidden]="!locations[0].isVisible" [ngClass]="{ 'active-map': locations[0].isActive }" [latitude]="locations[0].lat"
+  [longitude]="locations[0].lng" [zoom]="zoom" [styles]="mapStyle1" [streetViewControl]="false" [zoomControl]="false" (zoomChange)="zoomChanged($event)"></agm-map>
+<agm-map id="map2" [hidden]="!locations[1].isVisible" [ngClass]="{ 'active-map': locations[1].isActive }" [latitude]="locations[1].lat"
+  [longitude]="locations[1].lng" [zoom]="zoom" [styles]="mapStyle2" [streetViewControl]="false" [zoomControl]="false" (zoomChange)="zoomChanged($event)"></agm-map>

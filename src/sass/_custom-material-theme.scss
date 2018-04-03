@@ -1,0 +1,50 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+$custom-typography: mat-typography-config(
+  $font-family: "Roboto Condensed",
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// **Be sure that you only ever include this mixin once!**
+@include mat-core($custom-typography);
+
+// Define the default theme (same as the example above).
+$mapover-primary: mat-palette($mat-light-blue);
+$mapover-accent:  mat-palette($mat-pink, A200, A100, A400);
+$mapover-theme:   mat-dark-theme($mapover-primary, $mapover-accent);
+
+// uncomment to include various components
+@include mat-core-theme($mapover-theme);
+@include mat-autocomplete-theme($mapover-theme);
+@include mat-button-theme($mapover-theme);
+// @include mat-button-toggle-theme($mapover-theme);
+// @include mat-card-theme($mapover-theme);
+// @include mat-checkbox-theme($mapover-theme);
+// @include mat-chips-theme($mapover-theme);
+// @include mat-table-theme($mapover-theme);
+// @include mat-datepicker-theme($mapover-theme);
+@include mat-dialog-theme($mapover-theme);
+// @include mat-divider-theme($mapover-theme);
+// @include mat-expansion-panel-theme($mapover-theme);
+@include mat-form-field-theme($mapover-theme);
+// @include mat-grid-list-theme($mapover-theme);
+@include mat-icon-theme($mapover-theme);
+@include mat-input-theme($mapover-theme);
+// @include mat-list-theme($mapover-theme);
+// @include mat-menu-theme($mapover-theme);
+// @include mat-paginator-theme($mapover-theme);
+// @include mat-progress-bar-theme($mapover-theme);
+@include mat-progress-spinner-theme($mapover-theme);
+// @include mat-radio-theme($mapover-theme);
+// @include mat-select-theme($mapover-theme);
+// @include mat-sidenav-theme($mapover-theme);
+// @include mat-slide-toggle-theme($mapover-theme);
+// @include mat-slider-theme($mapover-theme);
+// @include mat-stepper-theme($mapover-theme);
+@include mat-tabs-theme($mapover-theme);
+// @include mat-toolbar-theme($mapover-theme);
+// @include mat-tooltip-theme($mapover-theme);
+// @include mat-snack-bar-theme($mapover-theme);
