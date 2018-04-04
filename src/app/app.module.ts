@@ -21,7 +21,7 @@ import { MapoverComponent } from './mapover/mapover.component';
     SharedModule,
     RouterModule.forRoot(
       [
-        { path: '', component: MapoverComponent },
+        { path: 'mapover', component: MapoverComponent },
       ],
       { enableTracing: false } // enable for debug only
     )
@@ -30,3 +30,5 @@ import { MapoverComponent } from './mapover/mapover.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// ng build --prod --base-href mapover
