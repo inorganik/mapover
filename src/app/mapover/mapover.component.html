@@ -1,7 +1,7 @@
 <div class="mapover-sidebar">
   <div class="legend legend-width">
-    <h1><span class="color-primary">M</span><span class="color-secondary">A</span><span class="color-primary">P</span><span class="color-secondary">O</span><span class="color-primary">V</span><span class="color-secondary">E</span><span class="color-primary">R</span></h1>
-    <p>Compare the land mass of 2 locations</p>
+    <h1 [ngClass]="{ 'secondary-over-primary': secondaryOnTop, 'primary-over-secondary': !secondaryOnTop }">MAPOVER</h1>
+    <p><em>Compare the land mass of 2 locations</em><br>by <a href="https://twitter.com/inorganik">@inorganik</a></p>
   </div>
   <div class="floating-box legend-width location1" [ngClass]="{ 'active-location': locations[0].isActive }"d>
     <!-- LOCATION 1 -->
