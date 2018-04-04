@@ -2,10 +2,12 @@ import { Component, AfterViewInit, ViewChild, ApplicationRef, ViewEncapsulation 
 import { Title, DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 import { AgmMap } from '@agm/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { mapStyle1 } from './map-styles/mapstyle-1';
 import { mapStyle2 } from './map-styles/mapstyle-2';
 import { Location, allLocations } from './location';
+import { ShareModalComponent } from './share-modal/share-modal.component';
 
 declare let google: any;
 
@@ -18,7 +20,7 @@ declare let google: any;
 export class MapoverComponent implements AfterViewInit {
 
   allLocations: Location[] = allLocations;
-  locations: Location[];
+  locations: Location[] = [];
 
   zoom = 11;
 
@@ -34,11 +36,14 @@ export class MapoverComponent implements AfterViewInit {
 
   @ViewChild(AgmMap) agmMap;
 
+  width = 700;
+
   constructor(
     titleService: Title,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
-    private applicationRef: ApplicationRef
+    private applicationRef: ApplicationRef,
+    public dialog: MatDialog
   ) {
     titleService.setTitle('MAPOVER');
     // icons
@@ -48,8 +53,36 @@ export class MapoverComponent implements AfterViewInit {
     iconRegistry.addSvgIcon('swap-vert', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_swap_vert_black_24px.svg'));
     iconRegistry.addSvgIcon('visibility', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_visibility_black_24px.svg'));
     iconRegistry.addSvgIcon('visibility-off', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_visibility_off_black_24px.svg'));
+    iconRegistry.addSvgIcon('share-image', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_mms_black_24px.svg'));
+    iconRegistry.addSvgIcon('random', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_cached_black_24px.svg'));
     // locations
-    this.locations = this.allLocations.slice(0, 2);
+    this.randomLocationForIndex(0);
+    this.randomLocationForIndex(1);
+    // modal
+    if (window.innerWidth < this.width) {
+      this.width = window.innerWidth;
+    }
+  }
+
+  randomLocation() {
+    const rand = Math.floor(Math.random() * this.allLocations.length);
+    return this.allLocations[rand];
+  }
+
+  randomLocationForIndex(idx) {
+    if (this.locations[idx]) {
+      this.locations[idx].isVisible = true;
+    }
+    let randLoc = this.randomLocation();
+    const oppo = this.oppositeIndex(idx);
+    while (this.locations[idx] && this.locations[idx].description === randLoc.description ||
+      this.locations[oppo] && this.locations[oppo].description === randLoc.description) {
+      randLoc = this.randomLocation();
+    }
+    this.locations[idx] = randLoc;
+    if (this.locations[0] && this.locations[1]) {
+      this.setActive(idx);
+    }
   }
 
   ngAfterViewInit() {
@@ -63,6 +96,7 @@ export class MapoverComponent implements AfterViewInit {
   setPlace(idx, place) {
     this.setActive(idx);
     console.log('set place', place);
+    this.locations[idx].description = place.description;
     if (this.placesService) {
       this.loading = true;
       this.placesService.getDetails({
@@ -117,6 +151,20 @@ export class MapoverComponent implements AfterViewInit {
       this.locations[this.oppositeIndex(idx)].isVisible = true;
       this.setActive(this.oppositeIndex(idx));
     }
+  }
+
+  openShareModal(): void {
+    console.log('locations', this.locations);
+    const modalRef = this.dialog.open(ShareModalComponent, {
+      width: this.width + 'px',
+      hasBackdrop: true,
+      data: {
+        locations: this.locations,
+        colors: ['#00bceb', '#ff0055'],
+        topIndex: (this.secondaryOnTop) ? 1 : 0,
+        zoom: this.zoom
+      }
+    });
   }
 
 }

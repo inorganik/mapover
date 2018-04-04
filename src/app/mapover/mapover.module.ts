@@ -7,6 +7,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { MapoverComponent } from './mapover.component';
 import { SharedModule } from '../shared/shared.module';
 import { PlaceSearchComponent } from './place-search/place-search.component';
+import { ShareModalComponent } from './share-modal/share-modal.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,11 @@ import { PlaceSearchComponent } from './place-search/place-search.component';
   ],
   declarations: [
     MapoverComponent,
-    PlaceSearchComponent
+    PlaceSearchComponent,
+    ShareModalComponent
+  ],
+  entryComponents: [
+    ShareModalComponent
   ]
 })
 export class MapoverModule { }

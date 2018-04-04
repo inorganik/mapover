@@ -141,7 +141,7 @@ export const mapStyle1 = [
     'elementType': 'geometry.fill',
     'stylers': [
       {
-        'color': '#00caff'
+        'color': '#00bceb'
       }
     ]
   },
@@ -195,7 +195,7 @@ export const mapStyle1 = [
     'elementType': 'geometry.fill',
     'stylers': [
       {
-        'color': '#00caff'
+        'color': '#00bceb'
       }
     ]
   },

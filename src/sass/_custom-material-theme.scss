@@ -17,11 +17,11 @@ $mapover-blue: (
   200: #75e3ff,
   300: #45daff,
   400: #1cd2ff,
-  500: #00caff,
-  600: #00bceb,
-  700: #00a8eb,
-  800: #009ad6,
-  900: #008dce,
+  500: #00bceb,
+  600: #00a8eb,
+  700: #009ad6,
+  800: #008dce,
+  900: #0080bb,
   A100: #c6f4ff,
   A200: #97eaff,
   A400: #45daff,
@@ -103,14 +103,14 @@ $mapover-theme:   mat-light-theme($mapover-primary, $mapover-accent);
 // @include mat-menu-theme($mapover-theme);
 // @include mat-paginator-theme($mapover-theme);
 // @include mat-progress-bar-theme($mapover-theme);
-@include mat-progress-spinner-theme($mapover-theme);
+// @include mat-progress-spinner-theme($mapover-theme);
 // @include mat-radio-theme($mapover-theme);
 // @include mat-select-theme($mapover-theme);
 // @include mat-sidenav-theme($mapover-theme);
 // @include mat-slide-toggle-theme($mapover-theme);
 // @include mat-slider-theme($mapover-theme);
 // @include mat-stepper-theme($mapover-theme);
-@include mat-tabs-theme($mapover-theme);
+// @include mat-tabs-theme($mapover-theme);
 // @include mat-toolbar-theme($mapover-theme);
 // @include mat-tooltip-theme($mapover-theme);
 // @include mat-snack-bar-theme($mapover-theme);

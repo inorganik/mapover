@@ -45,6 +45,16 @@
 	}
 }
 
+$icon-dimension: 22px;
+
+.ctrl-bar .mat-icon-button {
+  margin-left: 2px;
+  mat-icon {
+    width: $icon-dimension;
+    height: $icon-dimension;
+  }
+}
+
 .mapover-sidebar {
 	position: absolute;
 	z-index: 10;
@@ -73,7 +83,8 @@
 	}
 	p {
 		font-size: .8em;
-		color: $gray-600;
+    color: $gray-600;
+    margin: 0;
 	}
 }
 
@@ -113,4 +124,28 @@ agm-map {
 		z-index: 2;
 		opacity: .4;
 	}
+}
+
+.button-contain {
+  text-align: center;
+  margin-top: 20px;
+
+  .mat-button {
+    background: white;
+    box-shadow: $hard-box-shadow;
+    color: $secondary;
+    border-radius: $border-radius;
+    font-weight: 700;
+    svg {
+      fill: $primary;
+    }
+    mat-icon {
+      margin-left: 10px;
+    }
+    &:active {
+      top: 3px;
+      left: -3px;
+      box-shadow: $hard-box-shadow-active;
+    }
+  }
 }

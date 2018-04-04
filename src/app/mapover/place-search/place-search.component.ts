@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation, ApplicationRef } from '@angular/core';
 import { WindowRef } from '@agm/core/utils/browser-globals';
 import { MapsAPILoader } from '@agm/core';
 import { FormControl } from '@angular/forms';
@@ -34,17 +34,18 @@ export class PlaceSearchComponent implements OnInit {
     this.placeCtrl.setValue(this._location);
   }
 
+  @Input()
+  color: string;
+
   constructor(
-    private loader: MapsAPILoader
+    private loader: MapsAPILoader,
+    private applicationRef: ApplicationRef
   ) { }
 
   ngOnInit() {
     this.loader.load().then(() => {
       this.autocompleteService = new google.maps.places.AutocompleteService();
     });
-    if (this.location && this.location.place_id) {
-      this.placeCtrl.setValue(this.location);
-    }
   }
 
   onChange(event) {
@@ -56,7 +57,6 @@ export class PlaceSearchComponent implements OnInit {
 
   placeSearch() {
     const term = this.placeCtrl.value;
-    console.log('place search', term);
     if (term.length > 0) {
       if (this.autocompleteService) {
         this.autocompleteService.getPlacePredictions({
@@ -78,6 +78,7 @@ export class PlaceSearchComponent implements OnInit {
             console.error(status);
           }
           console.log('got predicts');
+          this.applicationRef.tick();
         });
       }
       else {

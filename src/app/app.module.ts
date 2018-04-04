@@ -21,7 +21,7 @@ import { MapoverComponent } from './mapover/mapover.component';
     SharedModule,
     RouterModule.forRoot(
       [
-        { path: 'mapover', component: MapoverComponent },
+        { path: '', component: MapoverComponent },
       ],
       { enableTracing: false } // enable for debug only
     )
