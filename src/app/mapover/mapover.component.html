@@ -2,6 +2,9 @@
   <div class="legend legend-width">
     <h1 [ngClass]="{ 'secondary-over-primary': secondaryOnTop, 'primary-over-secondary': !secondaryOnTop }">MAPOVER</h1>
     <p><em>Overlay 2 locations</em><br><small>by <a href="https://twitter.com/inorganik">@inorganik</a></small></p>
+    <div class="theme-well-contain selected"><div class="theme-well"></div></div>
+    <div class="theme-well-contain"><div class="theme-well blue-yellow"></div></div>
+    <div class="theme-well-contain"><div class="theme-well red-yellow"></div></div>
   </div>
   <div class="floating-box legend-width location1" [ngClass]="{ 'active-location': locations[0].isActive }"d>
     <!-- LOCATION 1 -->
@@ -49,10 +52,10 @@
   </div>
   <!-- BUTTONS -->
   <div class="button-contain legend-width">
-    <button mat-button (click)="openShareModal()">Shareable image	<mat-icon svgIcon="share-image" matSuffix></mat-icon></button>
+    <!-- <button mat-button (click)="openShareModal()">Shareable image	<mat-icon svgIcon="share-image" matSuffix></mat-icon></button> -->
   </div>
 </div>
 <agm-map id="map1" [hidden]="!locations[0].isVisible" [ngClass]="{ 'active-map': locations[0].isActive }" [latitude]="locations[0].lat"
-  [longitude]="locations[0].lng" [zoom]="zoom" [styles]="mapStyle1" [streetViewControl]="false" [zoomControl]="false" (zoomChange)="zoomChanged($event)"></agm-map>
+  [longitude]="locations[0].lng" [zoom]="zoom" [styles]="mapStyle1" [streetViewControl]="false" [zoomControl]="false" [scaleControl]="true" (zoomChange)="zoomChanged($event)"></agm-map>
 <agm-map id="map2" [hidden]="!locations[1].isVisible" [ngClass]="{ 'active-map': locations[1].isActive }" [latitude]="locations[1].lat"
-  [longitude]="locations[1].lng" [zoom]="zoom" [styles]="mapStyle2" [streetViewControl]="false" [zoomControl]="false" (zoomChange)="zoomChanged($event)"></agm-map>
+  [longitude]="locations[1].lng" [zoom]="zoom" [styles]="mapStyle2" [streetViewControl]="false" [zoomControl]="false" [scaleControl]="true" (zoomChange)="zoomChanged($event)"></agm-map>

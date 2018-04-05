@@ -5,34 +5,86 @@
   '~bootstrap/scss/variables',
 	'~bootstrap/scss/mixins';
 
+// DEFAULT THEME
 .location1 {
   h5 {
-    color: $location1;
+    color: $location1-default;
   }
-  &.active-location .ctrl-bar mat-icon.hinge-on-active svg {
-     fill: $location1;
-  }
+  &.active-location .ctrl-bar mat-icon.hinge-on-active svg,
   mat-icon.on-state svg {
-    fill: $location1;
+    fill: $location1-default;
   }
-}
-.location1-background {
-  background: $location2-light;
-
 }
 .location2 {
   h5 {
-    color: $location2;
+    color: $location2-default;
   }
-  &.active-location .ctrl-bar mat-icon.hinge-on-active svg {
-    fill: $location2;
-  }
+  &.active-location .ctrl-bar mat-icon.hinge-on-active svg,
   mat-icon.on-state svg {
-    fill: $location2;
+    fill: $location2-default;
   }
 }
-.location2-background {
-	background: $location2-light;
+// BLUE YELLOW
+.blue-yellow-theme {
+  .location1 {
+    h5 {
+      color: $location1-blueYellow;
+    }
+    &.active-location .ctrl-bar mat-icon.hinge-on-active svg,
+    mat-icon.on-state svg {
+      fill: $location1-blueYellow;
+    }
+  }
+  .location2 {
+    h5 {
+      color: $location2-blueYellow;
+    }
+    &.active-location .ctrl-bar mat-icon.hinge-on-active svg,
+    mat-icon.on-state svg {
+      fill: $location2-blueYellow;
+    }
+  }
+  .legend h1 {
+    &.primary-over-secondary {
+      color: rgba(0, 202, 255, 0.8);
+      text-shadow: -6px 6px rgb(255, 235, 59);
+    }
+    &.secondary-over-primary {
+      color: rgba(255, 235, 59, 0.8);
+      text-shadow: -6px 6px rgba(0, 202, 255, 0.4);
+    }
+  }
+}
+// RED YELLOW
+.red-yellow-theme {
+  .location1 {
+    h5 {
+      color: $location1-redYellow;
+    }
+    &.active-location .ctrl-bar mat-icon.hinge-on-active svg,
+    mat-icon.on-state svg {
+      fill: $location1-redYellow;
+    }
+  }
+  .location2 {
+    h5 {
+      color: $location2-redYellow;
+    }
+    &.active-location .ctrl-bar mat-icon.hinge-on-active svg,
+    mat-icon.on-state svg {
+      fill: $location2-redYellow;
+    }
+  }
+  .legend h1 {
+    &.primary-over-secondary {
+      color:  rgba(255, 0, 85, 0.6);
+      text-shadow: -6px 6px rgb(255, 235, 59);
+    }
+    &.secondary-over-primary {
+      color: rgba(255, 235, 59, 0.8);
+      text-shadow: -6px 6px  rgba(255, 0, 85, 0.4);
+    }
+  }
 }
 
 .location1, .location2 {
@@ -43,6 +95,63 @@
 		letter-spacing: 3px;
 		text-transform: uppercase;
 	}
+}
+
+.theme-well-contain {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  display: inline-block;
+  margin: 10px 10px 0 10px;
+  position: relative;
+  &.selected .theme-well {
+    opacity: 1.0;
+    &:after {
+      box-shadow: inset 0 0 .5em rgba(0,0,0,0.4);
+    }
+  }
+  .theme-well {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    cursor: pointer;
+    background: $location1-default;
+    position: absolute;
+    overflow: hidden;
+    opacity: 0.6;
+    &:before {
+      background: $location2-default;
+      width: 45px;
+      height: 45px;
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 12px;
+      transform: rotate(45deg);
+    }
+    &:after {
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-shadow: inset 0 0 .5em rgba(0,0,0,0.8);
+    }
+    &.blue-yellow {
+      background: $location1-blueYellow;
+      &:before {
+        background: $location2-blueYellow;
+      }
+    }
+    &.red-yellow {
+      background: $location1-redYellow;
+      &:before {
+        background: $location2-redYellow;
+      }
+    }
+  }
 }
 
 $icon-dimension: 22px;

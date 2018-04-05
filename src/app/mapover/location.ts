@@ -224,9 +224,51 @@ export const allLocations: Location[] = [
     isVisible: true
   },
   {
+    description: 'Miami, FL, USA',
+    lat: 25.7616798,
+    lng: -80.19179020000001,
+    isVisible: true
+  },
+  {
     description: 'Venice, Italy',
     lat: 45.4930475,
     lng: 12.417700299999979,
+    isVisible: true
+  },
+  {
+    description: 'St Petersburg, Russia',
+    lat: 59.9342802,
+    lng: 30.335098600000038,
+    isVisible: true
+  },
+  {
+    description: 'Moscow, Russia',
+    lat: 55.755826,
+    lng: 37.617299900000035,
+    isVisible: true
+  },
+  {
+    description: 'Copenhagen, Denmark',
+    lat: 55.6760968,
+    lng: 12.568337199999974,
+    isVisible: true
+  },
+  {
+    description: 'Osaka, Japan',
+    lat: 34.6937378,
+    lng: 135.50216509999996,
+    isVisible: true
+  },
+  {
+    description: 'Tel Aviv, Israel',
+    lat: 32.0929075,
+    lng: 34.80721649999998,
+    isVisible: true
+  },
+  {
+    description: 'Anchorage, AK, USA',
+    lat: 61.2180556,
+    lng: -149.90027780000003,
     isVisible: true
   }
 ];

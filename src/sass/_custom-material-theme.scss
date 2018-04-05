@@ -78,39 +78,58 @@ $mapover-red: (
 );
 
 // Define the default theme (same as the example above).
-$mapover-primary: mat-palette($mapover-blue);
-$mapover-accent:  mat-palette($mapover-red, A200, A100, A400);
-$mapover-theme:   mat-light-theme($mapover-primary, $mapover-accent);
+$mapover-default-primary: mat-palette($mapover-blue);
+$mapover-default-accent:  mat-palette($mapover-red, A200, A100, A400);
+$mapover-default-theme:   mat-light-theme($mapover-default-primary, $mapover-default-accent);
 
-// uncomment to include various components
-@include mat-core-theme($mapover-theme);
-@include mat-autocomplete-theme($mapover-theme);
-@include mat-button-theme($mapover-theme);
-// @include mat-button-toggle-theme($mapover-theme);
-// @include mat-card-theme($mapover-theme);
-// @include mat-checkbox-theme($mapover-theme);
-// @include mat-chips-theme($mapover-theme);
-// @include mat-table-theme($mapover-theme);
-// @include mat-datepicker-theme($mapover-theme);
-@include mat-dialog-theme($mapover-theme);
-// @include mat-divider-theme($mapover-theme);
-// @include mat-expansion-panel-theme($mapover-theme);
-@include mat-form-field-theme($mapover-theme);
-// @include mat-grid-list-theme($mapover-theme);
-@include mat-icon-theme($mapover-theme);
-@include mat-input-theme($mapover-theme);
-// @include mat-list-theme($mapover-theme);
-// @include mat-menu-theme($mapover-theme);
-// @include mat-paginator-theme($mapover-theme);
-// @include mat-progress-bar-theme($mapover-theme);
-// @include mat-progress-spinner-theme($mapover-theme);
-// @include mat-radio-theme($mapover-theme);
-// @include mat-select-theme($mapover-theme);
-// @include mat-sidenav-theme($mapover-theme);
-// @include mat-slide-toggle-theme($mapover-theme);
-// @include mat-slider-theme($mapover-theme);
-// @include mat-stepper-theme($mapover-theme);
-// @include mat-tabs-theme($mapover-theme);
-// @include mat-toolbar-theme($mapover-theme);
-// @include mat-tooltip-theme($mapover-theme);
-// @include mat-snack-bar-theme($mapover-theme);
+@mixin custom-material-theme($theme) {
+  // uncomment to include various components
+  @include mat-core-theme($theme);
+  @include mat-autocomplete-theme($theme);
+  @include mat-button-theme($theme);
+  // @include mat-button-toggle-theme($theme);
+  // @include mat-card-theme($theme);
+  // @include mat-checkbox-theme($theme);
+  // @include mat-chips-theme($theme);
+  // @include mat-table-theme($theme);
+  // @include mat-datepicker-theme($theme);
+  @include mat-dialog-theme($theme);
+  // @include mat-divider-theme($theme);
+  // @include mat-expansion-panel-theme($theme);
+  @include mat-form-field-theme($theme);
+  // @include mat-grid-list-theme($theme);
+  @include mat-icon-theme($theme);
+  @include mat-input-theme($theme);
+  // @include mat-list-theme($theme);
+  // @include mat-menu-theme($theme);
+  // @include mat-paginator-theme($theme);
+  // @include mat-progress-bar-theme($theme);
+  // @include mat-progress-spinner-theme($theme);
+  // @include mat-radio-theme($theme);
+  // @include mat-select-theme($theme);
+  // @include mat-sidenav-theme($theme);
+  // @include mat-slide-toggle-theme($theme);
+  // @include mat-slider-theme($theme);
+  // @include mat-stepper-theme($theme);
+  // @include mat-tabs-theme($theme);
+  // @include mat-toolbar-theme($theme);
+  // @include mat-tooltip-theme($theme);
+  // @include mat-snack-bar-theme($theme);
+}
+
+@include custom-material-theme($mapover-default-theme);
+
+// alternate theme: blue-yellow
+$mapover-blueYellow-primary: mat-palette($mapover-blue);
+$mapover-blueYellow-accent:  mat-palette($mat-yellow, A200, A100, A400);
+$mapover-blueYellow-theme:   mat-light-theme($mapover-blueYellow-primary, $mapover-blueYellow-accent);
+.blue-yellow-theme {
+  @include custom-material-theme($mapover-blueYellow-theme);
+}
+// alternate theme: red-yellow
+$mapover-redYellow-primary: mat-palette($mapover-red);
+$mapover-redYellow-accent:  mat-palette($mat-yellow, A200, A100, A400);
+$mapover-redYellow-theme:   mat-light-theme($mapover-redYellow-primary, $mapover-redYellow-accent);
+.red-yellow-theme {
+  @include custom-material-theme($mapover-redYellow-theme);
+}

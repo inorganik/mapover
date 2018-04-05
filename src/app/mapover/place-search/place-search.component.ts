@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation, ApplicationRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import { WindowRef } from '@agm/core/utils/browser-globals';
 import { MapsAPILoader } from '@agm/core';
 import { FormControl } from '@angular/forms';
@@ -39,7 +39,7 @@ export class PlaceSearchComponent implements OnInit {
 
   constructor(
     private loader: MapsAPILoader,
-    private applicationRef: ApplicationRef
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -64,7 +64,7 @@ export class PlaceSearchComponent implements OnInit {
           types: ['(regions)']
         }, (predictions, status) => {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
-            this.predicts = predictions;
+            this.predicts = predictions.slice();
           }
           else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
             this.predicts = [
@@ -78,7 +78,7 @@ export class PlaceSearchComponent implements OnInit {
             console.error(status);
           }
           console.log('got predicts');
-          this.applicationRef.tick();
+          this.changeDetectorRef.detectChanges();
         });
       }
       else {
@@ -87,6 +87,7 @@ export class PlaceSearchComponent implements OnInit {
     }
     else {
       this.predicts = [];
+      this.changeDetectorRef.detectChanges();
     }
   }
 

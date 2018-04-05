@@ -69,8 +69,13 @@ $navbar-toggler-padding-x: .25rem;
 $hard-box-shadow: -6px 6px rgba(0,0,0,0.2);
 $hard-box-shadow-active: -2px 2px rgba(0,0,0,0.2);
 
-
-$location1: $primary;
-$location1-light: #a8eeff;
-$location2: $secondary;
-$location2-light: #ffb1cb;
+// MAPOVER SPECIFIC
+// default
+$location1-default: $primary;
+$location2-default: $secondary;
+// blue-yellow
+$location1-blueYellow: $primary;
+$location2-blueYellow: #ffeb3b;
+// red-yellow
+$location1-redYellow: $secondary;
+$location2-redYellow: #FFEB3B;
