@@ -1,12 +1,11 @@
 import { Component, AfterViewInit, ViewChild, ApplicationRef, ViewEncapsulation } from '@angular/core';
 import { Title, DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
-import { AgmMap } from '@agm/core';
+import { AgmMap, MapTypeStyle } from '@agm/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { mapStyle1 } from './map-styles/mapstyle-1';
-import { mapStyle2 } from './map-styles/mapstyle-2';
 import { Location, allLocations } from './location';
+import { MapstyleService } from './mapstyle.service';
 import { ShareModalComponent } from './share-modal/share-modal.component';
 
 declare let google: any;
@@ -24,9 +23,6 @@ export class MapoverComponent implements AfterViewInit {
 
   zoom = 11;
 
-  mapStyle1 = mapStyle1;
-  mapStyle2 = mapStyle2;
-
   loading = false;
   secondaryOnTop = true;
 
@@ -36,6 +32,16 @@ export class MapoverComponent implements AfterViewInit {
 
   @ViewChild(AgmMap) agmMap;
 
+  mapStyle1: MapTypeStyle[] = [];
+  mapStyle2: MapTypeStyle[] = [];
+
+  themeIndex = 0;
+  themes = [
+    ['#00bceb', '#ff0055'],
+    ['#FFC107', '#00bceb'],
+    ['#ff0055', '#FFC107']
+  ];
+
   width = 700;
 
   constructor(
@@ -43,9 +49,12 @@ export class MapoverComponent implements AfterViewInit {
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     private applicationRef: ApplicationRef,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private mapstyleService: MapstyleService
   ) {
     titleService.setTitle('MAPOVER');
+    // theme
+    this.setThemeIndex(this.themeIndex);
     // icons
     const iconPath = '../../assets/icons/';
     iconRegistry.addSvgIcon('pan', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_pan_tool_black_24px.svg'));
@@ -55,9 +64,8 @@ export class MapoverComponent implements AfterViewInit {
     iconRegistry.addSvgIcon('visibility-off', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_visibility_off_black_24px.svg'));
     iconRegistry.addSvgIcon('share-image', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_mms_black_24px.svg'));
     iconRegistry.addSvgIcon('random', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_cached_black_24px.svg'));
-    // locations
-    this.randomLocationForIndex(0);
-    this.randomLocationForIndex(1);
+    // set locations and theme
+    this.randomize();
     // modal
     if (window.innerWidth < this.width) {
       this.width = window.innerWidth;
@@ -83,6 +91,17 @@ export class MapoverComponent implements AfterViewInit {
     if (this.locations[0] && this.locations[1]) {
       this.setActive(idx);
     }
+  }
+
+  randomTheme() {
+    const randomTheme = Math.floor(Math.random() * this.themes.length);
+    this.setThemeIndex(randomTheme);
+  }
+
+  randomize() {
+    this.randomTheme();
+    this.randomLocationForIndex(0);
+    this.randomLocationForIndex(1);
   }
 
   ngAfterViewInit() {
@@ -160,11 +179,18 @@ export class MapoverComponent implements AfterViewInit {
       hasBackdrop: true,
       data: {
         locations: this.locations,
-        colors: ['#00bceb', '#ff0055'],
+        colors: this.themes[this.themeIndex],
         topIndex: (this.secondaryOnTop) ? 1 : 0,
         zoom: this.zoom
       }
     });
+  }
+
+  setThemeIndex(idx) {
+    this.themeIndex = idx;
+    const theme = this.themes[idx];
+    this.mapStyle1 = this.mapstyleService.generateWithColor(theme[0]);
+    this.mapStyle2 = this.mapstyleService.generateWithColor(theme[1]);
   }
 
 }

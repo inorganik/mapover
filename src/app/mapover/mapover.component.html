@@ -1,10 +1,10 @@
-<div class="mapover-sidebar">
+<div class="mapover-sidebar" [ngClass]="{ 'blue-yellow-theme': themeIndex == 1, 'red-yellow-theme': themeIndex == 2 }">
   <div class="legend legend-width">
-    <h1 [ngClass]="{ 'secondary-over-primary': secondaryOnTop, 'primary-over-secondary': !secondaryOnTop }">MAPOVER</h1>
+    <h1 [ngClass]="{ 'secondary-over-primary': secondaryOnTop, 'primary-over-secondary': !secondaryOnTop }" (click)="randomize()">MAPOVER</h1>
     <p><em>Overlay 2 locations</em><br><small>by <a href="https://twitter.com/inorganik">@inorganik</a></small></p>
-    <div class="theme-well-contain selected"><div class="theme-well"></div></div>
-    <div class="theme-well-contain"><div class="theme-well blue-yellow"></div></div>
-    <div class="theme-well-contain"><div class="theme-well red-yellow"></div></div>
+    <div class="theme-well-contain" [ngClass]="{ selected: themeIndex == 0 }" (click)="setThemeIndex(0)"><div class="theme-well"></div></div>
+    <div class="theme-well-contain" [ngClass]="{ selected: themeIndex == 1 }" (click)="setThemeIndex(1)"><div class="theme-well blue-yellow"></div></div>
+    <div class="theme-well-contain" [ngClass]="{ selected: themeIndex == 2 }" (click)="setThemeIndex(2)"><div class="theme-well red-yellow"></div></div>
   </div>
   <div class="floating-box legend-width location1" [ngClass]="{ 'active-location': locations[0].isActive }"d>
     <!-- LOCATION 1 -->

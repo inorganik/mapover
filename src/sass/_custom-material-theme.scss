@@ -121,14 +121,14 @@ $mapover-default-theme:   mat-light-theme($mapover-default-primary, $mapover-def
 
 // alternate theme: blue-yellow
 $mapover-blueYellow-primary: mat-palette($mapover-blue);
-$mapover-blueYellow-accent:  mat-palette($mat-yellow, A200, A100, A400);
+$mapover-blueYellow-accent:  mat-palette($mat-amber, A200, A100, A400);
 $mapover-blueYellow-theme:   mat-light-theme($mapover-blueYellow-primary, $mapover-blueYellow-accent);
 .blue-yellow-theme {
   @include custom-material-theme($mapover-blueYellow-theme);
 }
 // alternate theme: red-yellow
 $mapover-redYellow-primary: mat-palette($mapover-red);
-$mapover-redYellow-accent:  mat-palette($mat-yellow, A200, A100, A400);
+$mapover-redYellow-accent:  mat-palette($mat-amber, A200, A100, A400);
 $mapover-redYellow-theme:   mat-light-theme($mapover-redYellow-primary, $mapover-redYellow-accent);
 .red-yellow-theme {
   @include custom-material-theme($mapover-redYellow-theme);

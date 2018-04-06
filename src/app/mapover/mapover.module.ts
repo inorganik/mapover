@@ -8,6 +8,7 @@ import { MapoverComponent } from './mapover.component';
 import { SharedModule } from '../shared/shared.module';
 import { PlaceSearchComponent } from './place-search/place-search.component';
 import { ShareModalComponent } from './share-modal/share-modal.component';
+import { MapstyleService } from './mapstyle.service';
 
 @NgModule({
   imports: [
@@ -25,6 +26,9 @@ import { ShareModalComponent } from './share-modal/share-modal.component';
   ],
   entryComponents: [
     ShareModalComponent
+  ],
+  providers: [
+    MapstyleService
   ]
 })
 export class MapoverModule { }
