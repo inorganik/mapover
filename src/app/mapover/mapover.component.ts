@@ -100,6 +100,7 @@ export class MapoverComponent implements AfterViewInit {
 
   randomize() {
     this.randomTheme();
+    this.resetZoom();
     this.randomLocationForIndex(0);
     this.randomLocationForIndex(1);
   }
