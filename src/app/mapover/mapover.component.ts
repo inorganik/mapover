@@ -53,8 +53,6 @@ export class MapoverComponent implements AfterViewInit {
     private mapstyleService: MapstyleService
   ) {
     titleService.setTitle('MAPOVER');
-    // theme
-    this.setThemeIndex(this.themeIndex);
     // icons
     const iconPath = '../../assets/icons/';
     iconRegistry.addSvgIcon('pan', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_pan_tool_black_24px.svg'));
@@ -65,7 +63,9 @@ export class MapoverComponent implements AfterViewInit {
     iconRegistry.addSvgIcon('share-image', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_mms_black_24px.svg'));
     iconRegistry.addSvgIcon('random', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_cached_black_24px.svg'));
     // set locations and theme
-    this.randomize();
+    this.setThemeIndex(this.themeIndex);
+    this.randomLocationForIndex(0);
+    this.randomLocationForIndex(1);
     // modal
     if (window.innerWidth < this.width) {
       this.width = window.innerWidth;
