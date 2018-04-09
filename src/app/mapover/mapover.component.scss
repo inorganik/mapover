@@ -61,6 +61,15 @@ $red-text-on-bottom: rgba(255, 0, 85, 0.3);
       text-shadow: -6px 6px $blue-text-on-bottom;
     }
   }
+  .button-contain .mat-mini-fab {
+    background: white;
+    &.mat-accent {
+      background: white;
+    }
+    svg {
+      fill: $location1-blueYellow;
+    }
+  }
 }
 // RED YELLOW
 .red-yellow-theme {
@@ -90,6 +99,15 @@ $red-text-on-bottom: rgba(255, 0, 85, 0.3);
     &.secondary-over-primary {
       color: $yellow-text-on-top;
       text-shadow: -6px 6px  $red-text-on-bottom;
+    }
+  }
+  .button-contain .mat-mini-fab {
+    background: white;
+    &.mat-accent {
+      background: white;
+    }
+    svg {
+      fill: $location1-redYellow;
     }
   }
 }
@@ -183,6 +201,7 @@ $icon-dimension: 22px;
   box-shadow: $hard-box-shadow;
   position: relative;
   cursor: pointer;
+  z-index: 10;
 	h1 {
 		font-weight: 200;
 		letter-spacing: 15px;
@@ -204,7 +223,7 @@ $icon-dimension: 22px;
   }
   .emoji-link {
     position: absolute;
-    bottom: $spacer;
+    bottom: 10px;
     right: $spacer;
     a {
       -webkit-filter: grayscale(100%);
@@ -228,6 +247,7 @@ $icon-dimension: 22px;
 	margin-top: 20px;
   box-shadow: $hard-box-shadow;
   background: white;
+  transition: all .3s;
 
 	svg {
     fill: $gray-400;
@@ -260,24 +280,71 @@ agm-map {
 
 .button-contain {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 15px;
 
-  .mat-button {
+  .mat-mini-fab {
     background: white;
-    box-shadow: $hard-box-shadow;
-    color: $secondary;
-    border-radius: $border-radius;
-    font-weight: 700;
+    box-shadow: $hard-box-shadow !important;
     svg {
       fill: $primary;
     }
-    mat-icon {
-      margin-left: 10px;
-    }
-    &:active {
-      top: 3px;
-      left: -3px;
-      box-shadow: $hard-box-shadow-active;
+  }
+}
+
+//
+// COLLAPSING
+//
+
+.collapsed {
+  .floating-box,
+  .color-themes,
+  .legend p,
+  .emoji-link {
+    display: none;
+  }
+  .legend h1 {
+    margin: 0;
+  }
+}
+
+//
+// MOBILE
+//
+
+@media (max-width: map-get($grid-breakpoints, 'sm')) { // 576px and less
+  .mapover-sidebar {
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+  .legend-width {
+    width: 100%;
+    max-width: 100%;
+  }
+  .legend,
+  .floating-box {
+    box-shadow: 0 6px rgba(0,0,0,0.2);
+  }
+  .floating-box {
+    .floating-box-inner {
+      padding: 5px $spacer 1px $spacer;
     }
   }
+  .legend {
+    padding: 8px $spacer;
+    h1 {
+      margin-top: 0;
+    }
+  }
+
+  $icon-dimension-mobile: 18px;
+
+  .ctrl-bar .mat-icon-button {
+    mat-icon {
+      width: $icon-dimension-mobile;
+      height: $icon-dimension-mobile;
+    }
+  }
+
+
 }

@@ -27,6 +27,7 @@ export class MapoverComponent implements AfterViewInit {
 
   loading = false;
   secondaryOnTop = true;
+  isCollapsed = false;
 
   place1: any;
   place2: any;
@@ -62,6 +63,8 @@ export class MapoverComponent implements AfterViewInit {
     this.addIcon('visibility-off', 'ic_visibility_off_black_24px.svg');
     this.addIcon('share-image', 'ic_mms_black_24px.svg');
     this.addIcon('random', 'ic_cached_black_24px.svg');
+    this.addIcon('collapse', 'ic_keyboard_arrow_up_black_24px.svg');
+    this.addIcon('expand', 'ic_keyboard_arrow_down_black_24px.svg');
     // set mapLocations and theme
     this.setThemeIndex(this.themeIndex);
     this.randomLocationForIndex(0);

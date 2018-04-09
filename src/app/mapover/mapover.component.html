@@ -1,10 +1,12 @@
-<div class="mapover-sidebar" [ngClass]="{ 'blue-yellow-theme': themeIndex == 1, 'red-yellow-theme': themeIndex == 2 }">
+<div class="mapover-sidebar" [ngClass]="{ 'blue-yellow-theme': themeIndex == 1, 'red-yellow-theme': themeIndex == 2, 'collapsed': isCollapsed }">
   <div class="legend legend-width">
     <h1 [ngClass]="{ 'secondary-over-primary': secondaryOnTop, 'primary-over-secondary': !secondaryOnTop }" (click)="randomize()">MAPOVER</h1>
     <p><em>Overlay 2 locations</em></p>
-    <div class="theme-well-contain" [ngClass]="{ selected: themeIndex == 0 }" (click)="setThemeIndex(0)"><div class="theme-well"></div></div>
-    <div class="theme-well-contain" [ngClass]="{ selected: themeIndex == 1 }" (click)="setThemeIndex(1)"><div class="theme-well blue-yellow"></div></div>
-    <div class="theme-well-contain" [ngClass]="{ selected: themeIndex == 2 }" (click)="setThemeIndex(2)"><div class="theme-well red-yellow"></div></div>
+    <div class="color-themes">
+      <div class="theme-well-contain" [ngClass]="{ selected: themeIndex == 0 }" (click)="setThemeIndex(0)"><div class="theme-well"></div></div>
+      <div class="theme-well-contain" [ngClass]="{ selected: themeIndex == 1 }" (click)="setThemeIndex(1)"><div class="theme-well blue-yellow"></div></div>
+      <div class="theme-well-contain" [ngClass]="{ selected: themeIndex == 2 }" (click)="setThemeIndex(2)"><div class="theme-well red-yellow"></div></div>
+    </div>
     <span class="emoji-link"><a href="https://twitter.com/inorganik" target="_blank" title="@inorganik">👾</a></span>
   </div>
   <div class="floating-box legend-width location1" [ngClass]="{ 'active-location': mapLocations[0].isActive }"d>
@@ -54,9 +56,13 @@
   <!-- BUTTONS -->
   <div class="button-contain legend-width">
     <!-- <button mat-button (click)="openShareModal()">Shareable image	<mat-icon svgIcon="share-image" matSuffix></mat-icon></button> -->
+    <button mat-mini-fab (click)="isCollapsed = !isCollapsed">
+      <mat-icon *ngIf="!isCollapsed" aria-label="Collapse" svgIcon="collapse"></mat-icon>
+      <mat-icon *ngIf="isCollapsed" aria-label="Expand" svgIcon="expand"></mat-icon>
+    </button>
   </div>
 </div>
 <agm-map id="map1" [hidden]="!mapLocations[0].isVisible" [ngClass]="{ 'active-map': mapLocations[0].isActive }" [latitude]="mapLocations[0].lat"
-  [longitude]="mapLocations[0].lng" [zoom]="zoom" [styles]="mapStyle1" [streetViewControl]="false" [zoomControl]="false" [scaleControl]="true" (zoomChange)="zoomChanged($event)"></agm-map>
+  [longitude]="mapLocations[0].lng" [zoom]="zoom" [styles]="mapStyle1" [streetViewControl]="false" [zoomControl]="false" (zoomChange)="zoomChanged($event)"></agm-map>
 <agm-map id="map2" [hidden]="!mapLocations[1].isVisible" [ngClass]="{ 'active-map': mapLocations[1].isActive }" [latitude]="mapLocations[1].lat"
-  [longitude]="mapLocations[1].lng" [zoom]="zoom" [styles]="mapStyle2" [streetViewControl]="false" [zoomControl]="false" [scaleControl]="true" (zoomChange)="zoomChanged($event)"></agm-map>
+  [longitude]="mapLocations[1].lng" [zoom]="zoom" [styles]="mapStyle2" [streetViewControl]="false" [zoomControl]="false" (zoomChange)="zoomChanged($event)"></agm-map>
