@@ -8,8 +8,8 @@
       "root": "src",
       "outDir": "../inorganik/mapover",
       "assets": [
-        "assets",
-        "favicon.ico"
+        "./assets",
+        "./favicon.png"
       ],
       "index": "index.html",
       "main": "main.ts",
