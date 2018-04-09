@@ -63,6 +63,6 @@
   </div>
 </div>
 <agm-map id="map1" [hidden]="!mapLocations[0].isVisible" [ngClass]="{ 'active-map': mapLocations[0].isActive }" [latitude]="mapLocations[0].lat"
-  [longitude]="mapLocations[0].lng" [zoom]="zoom" [styles]="mapStyle1" [streetViewControl]="false" [zoomControl]="false" (zoomChange)="zoomChanged($event)"></agm-map>
+  [longitude]="mapLocations[0].lng" [zoom]="zoom" [styles]="mapStyle1" [streetViewControl]="false" [zoomControl]="false" [scaleControl]="true" (zoomChange)="zoomChanged($event)"></agm-map>
 <agm-map id="map2" [hidden]="!mapLocations[1].isVisible" [ngClass]="{ 'active-map': mapLocations[1].isActive }" [latitude]="mapLocations[1].lat"
-  [longitude]="mapLocations[1].lng" [zoom]="zoom" [styles]="mapStyle2" [streetViewControl]="false" [zoomControl]="false" (zoomChange)="zoomChanged($event)"></agm-map>
+  [longitude]="mapLocations[1].lng" [zoom]="zoom" [styles]="mapStyle2" [streetViewControl]="false" [zoomControl]="false" [scaleControl]="true" (zoomChange)="zoomChanged($event)"></agm-map>

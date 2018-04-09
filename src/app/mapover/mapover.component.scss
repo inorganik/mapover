@@ -240,6 +240,7 @@ $icon-dimension: 22px;
 }
 
 .legend-width {
+  width: 330px;
 	max-width: 400px;
 }
 .floating-box {
@@ -345,6 +346,5 @@ agm-map {
       height: $icon-dimension-mobile;
     }
   }
-
 
 }
