@@ -130,8 +130,8 @@ export class MapoverComponent implements AfterViewInit {
       }, (placeDetails, status) => {
         this.loading = false;
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-          this.mapLocations[idx].lat = placeDetails.geometry.MapLocation.lat();
-          this.mapLocations[idx].lng = placeDetails.geometry.MapLocation.lng();
+          this.mapLocations[idx].lat = placeDetails.geometry.location.lat();
+          this.mapLocations[idx].lng = placeDetails.geometry.location.lng();
           console.log('set coords:', this.mapLocations[idx].lat, this.mapLocations[idx].lng);
           this.resetZoom();
           this.applicationRef.tick();

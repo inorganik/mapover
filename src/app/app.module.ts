@@ -26,4 +26,12 @@ import { MapoverModule } from './mapover/mapover.module';
 })
 export class AppModule { }
 
-// ng build --prod --deploy-url=mapover
+/*
+  for local dev:
+  { provide: APP_BASE_HREF, useValue: '/'}
+
+  for prod:
+  { provide: APP_BASE_HREF, useValue: '/mapover'}
+  prod build:
+  ng build --prod --deploy-url=mapover
+*/
