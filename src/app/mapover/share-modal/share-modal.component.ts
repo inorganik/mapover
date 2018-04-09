@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { environment } from '../../../environments/environment';
-import { Location } from '../location';
+import { MapLocation } from '../map-location';
 
 @Component({
   selector: 'app-share-modal',
@@ -27,16 +27,16 @@ export class ShareModalComponent implements OnInit {
   ngOnInit() {
     // console.log('dialogRef', this.dialogRef);
 
-    const locations = <Location[]>this.data.locations;
+    const MapLocations = <MapLocation[]>this.data.MapLocations;
     const zoom = this.data.zoom;
     const map1Index = this.data.topIndex;
     const map2Index = (this.data.topIndex === 0) ? 1 : 0;
     const map1Color = this.data.colors[map1Index];
     const map2Color = this.data.colors[map2Index];
-    const map1 = this.constructStaticImageUrl(locations[map1Index], zoom, map1Color, this.mapSize);
+    const map1 = this.constructStaticImageUrl(MapLocations[map1Index], zoom, map1Color, this.mapSize);
     console.log('map1', map1);
     const image1 = <HTMLCanvasElement>this.appendImage(map1, 'map1Image');
-    const map2 = this.constructStaticImageUrl(locations[map2Index], zoom, map2Color, this.mapSize);
+    const map2 = this.constructStaticImageUrl(MapLocations[map2Index], zoom, map2Color, this.mapSize);
     console.log('map2', map2);
     const image2 = <HTMLCanvasElement>this.appendImage(map2, 'map2Image');
 
@@ -71,7 +71,7 @@ export class ShareModalComponent implements OnInit {
     */
   }
 
-  constructStaticImageUrl(loc: Location, zoom: number, hexColor: string, size: string): string {
+  constructStaticImageUrl(loc: MapLocation, zoom: number, hexColor: string, size: string): string {
     const root = 'https://maps.googleapis.com/maps/api/staticmap?';
     const color = '0x' + hexColor.substr(1, 6);
     const mapstyle = this.mapstyleTemplate.replace(/0x00bceb/g, color);

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { APP_BASE_HREF } from '@angular/common';
 // custom
 import { SharedModule } from './shared/shared.module';
 import { MapoverModule } from './mapover/mapover.module';
@@ -18,9 +19,11 @@ import { MapoverModule } from './mapover/mapover.module';
     MapoverModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '/mapover'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 
-// ng build --prod --base-href mapover
+// ng build --prod --deploy-url=mapover

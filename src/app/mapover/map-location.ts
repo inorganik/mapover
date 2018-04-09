@@ -1,4 +1,4 @@
-export class Location {
+export class MapLocation {
   description: string;
   lat: number;
   lng: number;
@@ -6,7 +6,7 @@ export class Location {
   isVisible?: boolean;
 }
 
-export const allLocations: Location[] = [
+export const allMapLocations: MapLocation[] = [
   {
     description: 'San Francisco, CA, USA',
     lat: 37.7749295,
