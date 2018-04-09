@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewChild, ApplicationRef, ViewEncapsulation } from '@angular/core';
-import { Title, DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 import { AgmMap, MapTypeStyle } from '@agm/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -45,14 +45,12 @@ export class MapoverComponent implements AfterViewInit {
   width = 700;
 
   constructor(
-    titleService: Title,
     iconRegistry: MatIconRegistry,
     sanitizer: DomSanitizer,
     private applicationRef: ApplicationRef,
     public dialog: MatDialog,
     private mapstyleService: MapstyleService
   ) {
-    titleService.setTitle('MAPOVER');
     // icons
     const iconPath = '../../assets/icons/';
     iconRegistry.addSvgIcon('pan', sanitizer.bypassSecurityTrustResourceUrl(iconPath + 'ic_pan_tool_black_24px.svg'));

@@ -29,6 +29,9 @@ import { MapstyleService } from './mapstyle.service';
   ],
   providers: [
     MapstyleService
+  ],
+  exports: [
+    MapoverComponent
   ]
 })
 export class MapoverModule { }
