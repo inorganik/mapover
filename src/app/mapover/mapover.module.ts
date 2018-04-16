@@ -16,7 +16,8 @@ import { MapstyleService } from './mapstyle.service';
     SharedModule,
     AgmCoreModule.forRoot({
       apiKey: environment.googleApiKey,
-      libraries: ['places']
+      libraries: ['places'],
+      apiVersion: '3.exp'
     })
   ],
   declarations: [
