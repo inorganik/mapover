@@ -123,26 +123,28 @@ export class MapoverComponent implements AfterViewInit {
 
   // place chosen from typeahead
   setPlace(idx, place) {
-    this.setActive(idx);
-    console.log('set place', place.description);
-    this.mapLocations[idx].description = place.description;
-    if (this.placesService) {
-      this.loading = true;
-      this.placesService.getDetails({
-        placeId: place.place_id
-      }, (placeDetails, status) => {
-        this.loading = false;
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          this.mapLocations[idx].lat = placeDetails.geometry.location.lat();
-          this.mapLocations[idx].lng = placeDetails.geometry.location.lng();
-          console.log('set coords:', this.mapLocations[idx].lat, this.mapLocations[idx].lng);
-          this.resetZoom();
-          this.applicationRef.tick();
-        }
-        else {
-          console.error(status);
-        }
-      });
+    if (place && place.place_id) {
+      this.setActive(idx);
+      console.log('set place', place.description);
+      this.mapLocations[idx].description = place.description;
+      if (this.placesService) {
+        this.loading = true;
+        this.placesService.getDetails({
+          placeId: place.place_id
+        }, (placeDetails, status) => {
+          this.loading = false;
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            this.mapLocations[idx].lat = placeDetails.geometry.location.lat();
+            this.mapLocations[idx].lng = placeDetails.geometry.location.lng();
+            console.log('set coords:', this.mapLocations[idx].lat, this.mapLocations[idx].lng);
+            this.resetZoom();
+            this.applicationRef.tick();
+          }
+          else {
+            console.error(status);
+          }
+        });
+      }
     }
   }
 

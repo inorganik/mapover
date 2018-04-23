@@ -1,25 +1,29 @@
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { WindowRef } from '@agm/core/utils/browser-globals';
 import { MapsAPILoader } from '@agm/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import {
-  catchError,
   debounceTime,
   distinctUntilChanged,
-  map,
-  switchMap,
-  tap
+  switchMap
 } from 'rxjs/operators';
 
 declare let google: any;
+
+interface Place {
+  description: string;
+  matched_substrings: [any];
+  place_id: string;
+  terms: [any];
+  types: [string];
+}
 
 @Component({
   selector: 'app-place-search',
   templateUrl: './place-search.component.html',
   encapsulation: ViewEncapsulation.None
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class PlaceSearchComponent implements OnInit {
@@ -27,10 +31,7 @@ export class PlaceSearchComponent implements OnInit {
   autocompleteService: any;
 
   placeCtrl = new FormControl();
-  predicts = [];
-  keyupTimeout: any;
   keyupDelay = 500;
-  errorMessage = '';
   places$: Observable<any>;
 
   @Output() onSelected = new EventEmitter<any>();
@@ -50,8 +51,7 @@ export class PlaceSearchComponent implements OnInit {
   color: string;
 
   constructor(
-    private loader: MapsAPILoader,
-    private changeDetectorRef: ChangeDetectorRef
+    private loader: MapsAPILoader
   ) { }
 
   ngOnInit() {
@@ -60,64 +60,56 @@ export class PlaceSearchComponent implements OnInit {
     });
 
     this.places$ = this.placeCtrl.valueChanges.pipe(
-      tap(() => this.errorMessage = ''), // clear any previous error message
       debounceTime(this.keyupDelay),
       distinctUntilChanged(),
-      switchMap(searchTerm => this.placeSearch)
-    )
+      switchMap(searchTerm => this.placeSearch(searchTerm))
+    );
   }
 
-
-  onChange(event) {
-    clearTimeout(this.keyupTimeout);
-    this.keyupTimeout = setTimeout(() => {
-      this.placeSearch();
-    }, this.keyupDelay);
-  }
-
-  placeSearch() {
-    const term = this.placeCtrl.value;
-    if (term.length > 0) {
-      if (this.autocompleteService) {
-        this.autocompleteService.getPlacePredictions({
-          input: term,
-          types: ['(regions)']
-        }, (predictions, status) => {
+  placeSearch(searchTerm): Observable<Place[]> {
+    if (searchTerm.length > 0) {
+      if (!this.autocompleteService) {
+        console.error('No autocomplete service');
+        return of([]);
+      }
+      return Observable.create(obs => {
+        const getPredicts = (predictions, status) => {
+          // console.log('got predicts', predictions, status);
           if (status === google.maps.places.PlacesServiceStatus.OK) {
-            this.predicts = predictions.slice();
+            obs.next(predictions.slice());
           }
           else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-            this.predicts = [
+            obs.next([
               { description: 'No results' }
-            ];
+            ]);
           }
           else {
-            this.predicts = [
-              { description: 'Server error' }
-            ];
             console.error(status);
+            obs.next([
+              { description: 'Server error' }
+            ]);
           }
-          console.log('got predicts');
-          this.changeDetectorRef.detectChanges();
-        });
-      }
-      else {
-        console.error('No autocomplete service');
-      }
+          obs.complete();
+        };
+
+        this.autocompleteService.getPlacePredictions({
+          input: searchTerm,
+          types: ['(regions)']
+        }, getPredicts);
+      });
     }
     else {
-      this.predicts = [];
-      this.changeDetectorRef.detectChanges();
+      return of([]);
     }
   }
 
   // different view/model values for autocomplete
-  displayFn(placeObj: any) {
-    return placeObj ? placeObj.description : '';
+  displayFn(place: Place) {
+    return place ? place.description : '';
   }
 
   selectedPlace(place) {
-    console.log('selected place from autocomplete', place);
+    // console.log('selected place from autocomplete', place);
     this.onSelected.emit(place.option.value);
   }
 
