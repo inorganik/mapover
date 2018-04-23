@@ -20,7 +20,7 @@ import { MapoverModule } from './mapover/mapover.module';
     SharedModule
   ],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/mapover'}
+    { provide: APP_BASE_HREF, useValue: '/'}
   ],
   bootstrap: [AppComponent]
 })

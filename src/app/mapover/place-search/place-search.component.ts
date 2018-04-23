@@ -2,6 +2,16 @@ import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy
 import { WindowRef } from '@agm/core/utils/browser-globals';
 import { MapsAPILoader } from '@agm/core';
 import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  switchMap,
+  tap
+} from 'rxjs/operators';
 
 declare let google: any;
 
@@ -16,10 +26,12 @@ export class PlaceSearchComponent implements OnInit {
 
   autocompleteService: any;
 
-  placeCtrl = new FormControl('', []);
+  placeCtrl = new FormControl();
   predicts = [];
   keyupTimeout: any;
   keyupDelay = 500;
+  errorMessage = '';
+  places$: Observable<any>;
 
   @Output() onSelected = new EventEmitter<any>();
 
@@ -46,7 +58,15 @@ export class PlaceSearchComponent implements OnInit {
     this.loader.load().then(() => {
       this.autocompleteService = new google.maps.places.AutocompleteService();
     });
+
+    this.places$ = this.placeCtrl.valueChanges.pipe(
+      tap(() => this.errorMessage = ''), // clear any previous error message
+      debounceTime(this.keyupDelay),
+      distinctUntilChanged(),
+      switchMap(searchTerm => this.placeSearch)
+    )
   }
+
 
   onChange(event) {
     clearTimeout(this.keyupTimeout);
