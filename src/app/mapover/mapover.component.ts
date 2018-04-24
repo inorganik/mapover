@@ -8,6 +8,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { MapLocation, allMapLocations } from './map-location';
 import { MapstyleService } from './mapstyle.service';
 import { ShareModalComponent } from './share-modal/share-modal.component';
+import { Place } from './place-search/place-search.component';
 
 declare let google: any;
 
@@ -122,7 +123,7 @@ export class MapoverComponent implements AfterViewInit {
   }
 
   // place chosen from typeahead
-  setPlace(idx, place) {
+  setPlace(idx, place: Place) {
     if (place && place.place_id) {
       this.setActive(idx);
       console.log('set place', place.description);

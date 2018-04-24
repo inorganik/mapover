@@ -12,7 +12,7 @@ import {
 
 declare let google: any;
 
-interface Place {
+export interface Place {
   description: string;
   matched_substrings: [any];
   place_id: string;
@@ -34,7 +34,7 @@ export class PlaceSearchComponent implements OnInit {
   keyupDelay = 500;
   places$: Observable<any>;
 
-  @Output() onSelected = new EventEmitter<any>();
+  @Output() onSelected = new EventEmitter<Place>();
 
   // location
   private _location: any;
